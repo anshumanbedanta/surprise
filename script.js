@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const secondsSpan = document.getElementById('seconds');
     const giftBtn = document.getElementById('gift-btn');
 
-    // Target Date: set to a past time so timer immediately hits 00
-    const targetDate = new Date().getTime() - 1000;
+    // Setting the timer strictly for her birthday countdown!
+    const targetDate = new Date("April 24, 2026 00:00:00").getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
