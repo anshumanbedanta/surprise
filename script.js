@@ -38,13 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 countdownView.style.display = 'none';
                 celebrationView.style.display = 'block';
-                
+
                 // Allow display change to process before removing hidden class for transition
                 setTimeout(() => {
                     celebrationView.classList.remove('hidden');
                     triggerInitialConfetti();
                 }, 50);
-                
+
             }, 800); // Wait for fade out
         }
     }
@@ -89,9 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     giftBtn.addEventListener('click', () => {
         // Redirect to the photo album after a slight delay
-        giftBtn.textContent = 'Opening Album... ✨';
+        giftBtn.textContent = 'Opening Your Surprise... ✨';
         giftBtn.style.pointerEvents = 'none';
-        
+
         // Quick burst of confetti before transition
         confetti({
             particleCount: 150,
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             origin: { y: 0.6 },
             colors: ['#ff5e94', '#a056f3', '#ff8a5c']
         });
-        
+
         setTimeout(() => {
             window.location.href = 'album.html';
         }, 1500);
