@@ -58,22 +58,22 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create item container
         const item = document.createElement('div');
         item.className = 'masonry-item';
-        
+
         // Image wrapper for overlay
         const imgWrapper = document.createElement('div');
         imgWrapper.className = 'img-wrapper';
-        
+
         // Create image element
         const img = document.createElement('img');
         img.src = `images/${imgName}`;
         img.alt = `Memory ${index + 1}`;
         img.loading = 'lazy'; // For performance
-        
+
         // Create overlay
         const overlay = document.createElement('div');
         overlay.className = 'masonry-overlay';
         overlay.innerHTML = `<h3>Memory ✨</h3>`;
-        
+
         imgWrapper.appendChild(img);
         imgWrapper.appendChild(overlay);
 
@@ -109,28 +109,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeLightbox = () => {
         lightbox.classList.remove('active');
         document.body.style.overflow = 'auto'; // enable scrolling
-        setTimeout(() => { 
-            lightboxImg.src = ''; 
+        setTimeout(() => {
+            lightboxImg.src = '';
             lightboxImg.className = 'lightbox-content';
             if (lightboxCaption) {
                 lightboxCaption.innerHTML = '';
                 lightboxCaption.classList.remove('animate-caption');
             }
         }, 300); // clear after fade out
-        
+
         // Mobile only: random tile effects on returning to album
         if (window.innerWidth <= 600) {
             const items = document.querySelectorAll('.masonry-item');
             const mobileAnim = ['fadeInUp', 'zoomIn', 'slideInLeft', 'slideInRight'];
-            
+
             items.forEach(item => {
                 // Remove observer classes and styles
                 item.classList.remove('animate');
                 item.style.animation = 'none';
-                
+
                 // Force reflow
                 void item.offsetWidth;
-                
+
                 // Assign new random animation
                 const randomAnim = mobileAnim[Math.floor(Math.random() * mobileAnim.length)];
                 const randomDelay = Math.random() * 0.4;
@@ -140,12 +140,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     closeLightboxBtn.addEventListener('click', closeLightbox);
-    
+
     // Add event listener to the new mobile back button
     if (backLightboxBtn) {
         backLightboxBtn.addEventListener('click', closeLightbox);
     }
-    
+
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) {
             closeLightbox();
@@ -157,4 +157,87 @@ document.addEventListener('DOMContentLoaded', () => {
             closeLightbox();
         }
     });
+
+    // Final Surprise Logic
+    const openGiftBtn = document.getElementById('open-gift-btn');
+    const unlockSection = document.getElementById('unlock-section');
+    const unlockBtn = document.getElementById('unlock-btn');
+    const unlockCode = document.getElementById('unlock-code');
+    const giftBox = document.getElementById('gift-reveal');
+    const errorMsg = document.getElementById('error-msg');
+
+    if (openGiftBtn && unlockSection) {
+        openGiftBtn.addEventListener('click', () => {
+            openGiftBtn.textContent = 'Opening Your Gift... ✨';
+            openGiftBtn.style.pointerEvents = 'none';
+            openGiftBtn.style.animation = 'none'; // stop floating
+
+            // Wait briefly before revealing the lock challenge
+            setTimeout(() => {
+                const initialText = document.getElementById('initial-surprise-text');
+                if (initialText) initialText.style.display = 'none';
+                openGiftBtn.style.display = 'none';
+                unlockSection.style.display = 'flex';
+                unlockSection.style.animation = 'fadeInUp 0.8s ease forwards';
+            }, 1000);
+        });
+    }
+
+    if (unlockBtn && giftBox) {
+        unlockBtn.addEventListener('click', () => {
+            let val = unlockCode.value.toLowerCase().trim();
+            if (val === "budhi24042004") {
+                errorMsg.style.display = 'none';
+
+                const customAlert = document.getElementById('custom-alert-overlay');
+                const customAlertBtn = document.getElementById('custom-alert-btn');
+                
+                customAlert.classList.add('show');
+                
+                customAlertBtn.addEventListener('click', () => {
+                    customAlert.classList.remove('show');
+                    
+                    // Show gift and hide form elegantly
+                    unlockSection.style.display = 'none';
+                    giftBox.classList.add('active'); // trigger reveal
+                    
+                    // Smooth scroll down to the final message
+                    setTimeout(() => {
+                        giftBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100);
+                }, { once: true });
+            } else {
+                errorMsg.style.display = 'block';
+                // Trigger shake
+                errorMsg.style.animation = 'none';
+                void errorMsg.offsetWidth; // force reflow
+                errorMsg.style.animation = 'shake 0.4s ease';
+            }
+        });
+
+        // Also trigger on enter key
+        if (unlockCode) {
+            unlockCode.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') unlockBtn.click();
+            });
+        }
+    }
+
+    // PIN Reveal Logic
+    const revealPinBtn = document.getElementById('reveal-pin-btn');
+    const hiddenPin = document.getElementById('hidden-pin');
+
+    if (revealPinBtn && hiddenPin) {
+        revealPinBtn.addEventListener('click', () => {
+            // Lock to Unlock Animation
+            revealPinBtn.innerHTML = '🔓✨...';
+            revealPinBtn.style.pointerEvents = 'none';
+
+            setTimeout(() => {
+                revealPinBtn.style.display = 'none';
+                hiddenPin.innerHTML = 'Thought I’ll make you call me? 😄<br><br><b>PIN:</b> 472704 ❤️';
+                hiddenPin.classList.add('show');
+            }, 800);
+        });
+    }
 });

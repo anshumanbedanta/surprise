@@ -34,7 +34,50 @@
 
     <footer class="album-footer">
         <h2 class="brother-message">Your brother is always there for you 💖</h2>
+
+        <div class="final-surprise-section">
+            <p id="initial-surprise-text" class="final-text">One last surprise… Open it ❤️</p>
+            <button id="open-gift-btn" class="gift-btn" style="margin-bottom: 2rem;">Open Your Gift 🎁</button>
+
+            <div id="unlock-section" class="unlock-section"
+                style="display: none; flex-direction: column; align-items: center; width: 100%;">
+                <p class="final-text">One last surprise… but you need to unlock it ❤️</p>
+                <p class="hint-text">Hint: What I call you + your special date 😉</p>
+
+                <div class="input-container">
+                    <input type="password" id="unlock-code" class="secret-input" placeholder="exampleddmmyyyy">
+                    <button id="unlock-btn" class="gift-btn">Unlock 🎁</button>
+                </div>
+
+                <p id="error-msg" class="error-msg">Try again 😊</p>
+            </div>
+
+            <div id="gift-reveal" class="gift-reveal">
+                <p class="gift-title">Finally 😄❤️</p>
+                <p>A small treat for you from Zomato ☕🍰</p>
+
+                <div class="gift-code-box">
+                    <h3 style="font-size: 1.3rem; color: #E23744; text-align: center; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; letter-spacing: 1px;">ZOMATO VOUCHER 🍽️</h3>
+                    <p><b>Code:</b>7000-6220-7662-5996</p>
+                    <p><b>PIN:</b> Click below 😏</p>
+                    <button id="reveal-pin-btn" class="reveal-btn">🔐 Reveal PIN</button>
+                    <div id="hidden-pin" class="hidden-pin"></div>
+                </div>
+
+                <p class="help-text">Need help claiming it on Zomato? Just text or call me… I’ll help 😊</p>
+                <p class="gift-footer-msg">It’s small… but it’s from me ❤️</p>
+            </div>
+        </div>
     </footer>
+
+    <!-- Custom Premium Alert Modal -->
+    <div id="custom-alert-overlay" class="custom-alert-overlay">
+        <div class="custom-alert-box">
+            <h2>Surprise 🎉</h2>
+            <p>You got it!</p>
+            <button id="custom-alert-btn" class="gift-btn" style="margin-top: 1.5rem;">Open my gift ❤️</button>
+        </div>
+    </div>
 
     <!-- Lightbox -->
     <div id="lightbox" class="lightbox">
