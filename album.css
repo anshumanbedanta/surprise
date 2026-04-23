@@ -1,0 +1,336 @@
+:root {
+    --primary: #ff5e94;
+    --secondary: #a056f3;
+    --tertiary: #ff8a5c;
+    --bg-color: #0f0c29;
+    --text-main: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg-color);
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.background-effects {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    animation: float 10s infinite ease-in-out alternate;
+}
+
+.orb-1 { width: 300px; height: 300px; background: var(--primary); top: -50px; left: -50px; animation-delay: 0s; }
+.orb-2 { width: 400px; height: 400px; background: var(--secondary); bottom: -100px; right: -50px; animation-delay: -2s; }
+.orb-3 { width: 250px; height: 250px; background: var(--tertiary); top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -5s; }
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(30px, 50px) scale(1.1); }
+}
+
+.album-header {
+    text-align: center;
+    padding: 3rem 1rem 1rem;
+}
+
+.back-link {
+    display: inline-block;
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: var(--text-main);
+}
+
+.album-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    background: linear-gradient(to right, #ff9a9e, #fecfef, #ff9a9e);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(255, 154, 158, 0.2);
+    margin-bottom: 0.5rem;
+    animation: shineText 3s linear infinite;
+}
+
+@keyframes shineText {
+    to { background-position: 200% center; }
+}
+
+.album-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+}
+
+.gallery-container {
+    padding: 0 2rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.masonry {
+    display: column;
+    column-count: 3;
+    column-gap: 1.5rem;
+}
+
+.masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    border: 1px solid var(--glass-border);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.masonry-item.animate {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.img-wrapper {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.img-wrapper img {
+    width: 100%;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.masonry-item:hover {
+    transform: translateY(-12px) scale(1.03) rotate(1deg);
+    box-shadow: 0 20px 40px rgba(255, 94, 148, 0.4), 0 0 20px rgba(160, 86, 243, 0.3);
+    border-color: rgba(255, 94, 148, 0.5);
+    z-index: 10;
+}
+
+.masonry-item:hover .img-wrapper img {
+    transform: scale(1.15);
+    transition: transform 6s linear;
+    filter: brightness(1.1);
+}
+
+.masonry-item:hover .masonry-caption {
+    color: var(--primary);
+    text-shadow: 0 0 10px rgba(255, 94, 148, 0.3);
+}
+
+.masonry-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem 1rem 1rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.img-wrapper:hover .masonry-overlay {
+    opacity: 1;
+}
+
+.masonry-caption {
+    padding: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+    font-style: italic;
+    font-weight: 300;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+/* Lightbox Styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+    display: flex;
+    animation: lightboxOverlayFade 0.4s ease forwards;
+}
+
+@keyframes lightboxOverlayFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Beautiful Image Fade effect specifically for Desktop */
+@media (min-width: 601px) {
+    .lightbox.active .lightbox-content {
+        opacity: 0;
+        animation: desktopImageFade 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.1s;
+    }
+}
+
+@keyframes desktopImageFade {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.lightbox-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+    z-index: 1001;
+}
+
+.lightbox-content {
+    max-width: 100%;
+    max-height: 65vh; /* Gives room for text and button */
+    border-radius: 12px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    border: 2px solid var(--glass-border);
+    object-fit: contain;
+}
+
+.lightbox-caption {
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    font-style: italic;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+    opacity: 0;
+    line-height: 1.5;
+    padding: 0 10px;
+}
+
+.lightbox-caption.animate-caption {
+    animation: fadeInUp 0.8s ease forwards 0.4s;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+    z-index: 1002;
+}
+
+.close-lightbox:hover {
+    color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .masonry { column-count: 2; }
+    .album-title { font-size: 3rem; }
+}
+
+/* Base style for back button to hide on desktop */
+.back-btn-mobile { display: none; }
+
+/* New Mobile Specific Animations */
+.lightbox-img-animate {
+    animation: lightboxPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes lightboxPop {
+    0% { transform: scale(0.5) rotate(-5deg); opacity: 0; filter: blur(10px); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0px); }
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.6); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-50px) rotate(-5deg); }
+    to { opacity: 1; transform: translateX(0) rotate(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(50px) rotate(5deg); }
+    to { opacity: 1; transform: translateX(0) rotate(0); }
+}
+
+@media (max-width: 600px) {
+    .masonry { column-count: 2; column-gap: 1rem; }
+    .gallery-container { padding: 0 1rem 2rem; }
+    .album-header { padding: 2rem 1rem 1rem; }
+    .album-title { font-size: 2.5rem; }
+    .album-subtitle { font-size: 1rem; }
+    .masonry-caption { font-size: 0.8rem; padding: 0.8rem; }
+    
+    .close-lightbox { display: none; }
+    
+    .back-btn-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        color: white;
+        font-weight: bold;
+        font-size: 1.1rem;
+        z-index: 1001;
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        padding: 14px 28px;
+        border-radius: 30px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(255, 94, 148, 0.6);
+        animation: fadeInUp 0.5s ease backwards 0.3s;
+        margin-top: 0.5rem;
+    }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Memories - Happy Birthday</title>
+    <link rel="stylesheet" href="album.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-effects">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <header class="album-header">
+        <a href="index.html" class="back-link">← Back to Celebration</a>
+        <h1 class="album-title">Beautiful Memories</h1>
+        <p class="album-subtitle">A collection of best moments 📸✨</p>
+    </header>
+
+    <main class="gallery-container">
+        <div class="masonry" id="gallery-grid">
+            <!-- Images will be injected here -->
+        </div>
+    </main>
+
+    <footer class="album-footer">
+        <h2 class="brother-message">Your brother is always there for you 💖</h2>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox" id="close-lightbox">&times;</span>
+        <div class="lightbox-container">
+            <img class="lightbox-content" id="lightbox-img">
+            <p id="lightbox-caption" class="lightbox-caption"></p>
+            <div class="back-btn-mobile" id="back-lightbox">← Back to Album</div>
+        </div>
+    </div>
+
+    <script src="album.js"></script>
+</body>
+
+</html>

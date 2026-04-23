@@ -1,0 +1,287 @@
+:root {
+    --primary: #ff5e94;
+    --secondary: #a056f3;
+    --tertiary: #ff8a5c;
+    --bg-color: #0f0c29;
+    --text-main: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.8);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg-color);
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.background-effects {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    animation: float 10s infinite ease-in-out alternate;
+}
+
+.orb-1 {
+    width: 300px;
+    height: 300px;
+    background: var(--primary);
+    top: -50px;
+    left: -50px;
+    animation-delay: 0s;
+}
+
+.orb-2 {
+    width: 400px;
+    height: 400px;
+    background: var(--secondary);
+    bottom: -100px;
+    right: -50px;
+    animation-delay: -2s;
+}
+
+.orb-3 {
+    width: 250px;
+    height: 250px;
+    background: var(--tertiary);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -5s;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(30px, 50px) scale(1.1); }
+}
+
+.glass-container {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 3rem;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 10;
+    transition: all 0.5s ease;
+    animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    overflow: hidden;
+}
+
+.glass-container::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-20deg);
+    animation: sweep 4s infinite 2s;
+    pointer-events: none;
+}
+
+@keyframes sweep {
+    0% { left: -100%; }
+    30%, 100% { left: 200%; }
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.8) translateY(50px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.view {
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.view.hidden {
+    display: none;
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, var(--primary), var(--tertiary), var(--primary));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shineText 3s linear infinite;
+}
+
+.bday-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 5rem;
+    background: linear-gradient(to right, #ff9a9e, #fecfef, #ff9a9e);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(255, 154, 158, 0.2);
+    animation: heartbeat 2s infinite, shineText 3s linear infinite;
+}
+
+@keyframes shineText {
+    to { background-position: 200% center; }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.05); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.05); }
+    60% { transform: scale(1); }
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.sister-text {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: #e0e0e0;
+}
+
+.message {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.time-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem 1.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    min-width: 100px;
+}
+
+.time-box span:first-child {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+}
+
+.glow-btn {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 4px 15px rgba(255, 94, 148, 0.4);
+    transition: all 0.3s ease;
+    animation: pulseButton 2s infinite;
+}
+
+@keyframes pulseButton {
+    0% { transform: scale(1); box-shadow: 0 4px 15px rgba(255, 94, 148, 0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 8px 30px rgba(255, 94, 148, 0.8); }
+    100% { transform: scale(1); box-shadow: 0 4px 15px rgba(255, 94, 148, 0.4); }
+}
+
+.glow-btn:hover {
+    transform: scale(1.08); /* slight override */
+    box-shadow: 0 8px 25px rgba(255, 94, 148, 0.6);
+}
+
+.glow-btn:active {
+    transform: scale(0.95) !important;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .glass-container {
+        padding: 2rem 1rem;
+        width: 95%;
+    }
+    .title {
+        font-size: 2rem;
+    }
+    .bday-text {
+        font-size: 2.8rem;
+    }
+    .sister-text {
+        font-size: 1.5rem;
+    }
+    .message {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+    .countdown {
+        gap: 0.5rem;
+    }
+    .time-box {
+        min-width: 75px;
+        padding: 0.6rem 0.8rem;
+    }
+    .time-box span:first-child {
+        font-size: 1.5rem;
+    }
+    .label {
+        font-size: 0.75rem;
+    }
+    .glow-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        width: 100%;
+        white-space: normal;
+        word-wrap: break-word;
+    }
+}
