@@ -241,14 +241,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Scroll Hint Logic - Non-clickable, fades out gracefully on scroll
+    // Scroll Hint Logic - Click to smooth scroll
     const scrollHintBtn = document.getElementById('scroll-hint-btn');
     if (scrollHintBtn) {
+        let hintClicked = false;
+        
+        scrollHintBtn.addEventListener('click', () => {
+            hintClicked = true;
+            document.querySelector('.final-surprise-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            scrollHintBtn.style.opacity = '0';
+            scrollHintBtn.style.pointerEvents = 'none';
+        });
+        
+        // Also naturally fade it out if she scrolls down herself
         window.addEventListener('scroll', () => {
+            if (hintClicked) return;
+            
             if (window.scrollY > 200) {
                 scrollHintBtn.style.opacity = '0';
+                scrollHintBtn.style.pointerEvents = 'none';
             } else {
                 scrollHintBtn.style.opacity = '1';
+                scrollHintBtn.style.pointerEvents = 'auto';
             }
         });
     }
