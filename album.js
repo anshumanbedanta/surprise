@@ -240,4 +240,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 800);
         });
     }
+
+    // Scroll Hint Logic - Non-clickable, fades out gracefully on scroll
+    const scrollHintBtn = document.getElementById('scroll-hint-btn');
+    if (scrollHintBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                scrollHintBtn.style.opacity = '0';
+            } else {
+                scrollHintBtn.style.opacity = '1';
+            }
+        });
+    }
 });
